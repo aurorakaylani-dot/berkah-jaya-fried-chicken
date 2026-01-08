@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Berkah Jaya Fried Chicken</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+  --red:#ff1e00;
+  --orange:#ff7a00;
+  --yellow:#ffd000;
+  --ice:#7ffcff;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:#050505;color:#fff;overflow-x:hidden}
+
+/* LOADER */
+.loader{
+  position:fixed;inset:0;
+  background:radial-gradient(circle,#250000,#050505);
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  z-index:9999;
+}
+.loader.hide{opacity:0;visibility:hidden;transition:1.4s}
+.loader h1{
+  font-size:64px;font-weight:900;
+  background:linear-gradient(var(--yellow),var(--red));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  animation:glow 2s infinite alternate;
+}
+.loader p{letter-spacing:6px;color:#aaa}
+@keyframes glow{
+  from{text-shadow:0 0 40px rgba(255,80,0,.4)}
+  to{text-shadow:0 0 160px rgba(255,80,0,1)}
+}
+
+/* ===== FIRE BACKGROUND SUPER RAMAI ===== */
+.fire-bg{
+  position:fixed;
+  inset:0;
+  z-index:-3;
+  background:
+    radial-gradient(circle at 20% 90%, rgba(255,80,0,.45), transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255,0,0,.35), transparent 55%),
+    linear-gradient(#020202,#0a0a0a);
+  overflow:hidden;
+}
+
+/* API NAIK */
+.fire-bg::before{
+  content:"";
+  position:absolute;
+  inset:-200%;
+  background:
+    radial-gradient(circle, rgba(255,120,0,.35) 2px, transparent 3px),
+    radial-gradient(circle, rgba(255,0,0,.25) 3px, transparent 4px),
+    radial-gradient(circle, rgba(255,200,0,.2) 1px, transparent 2px);
+  background-size:120px 120px, 180px 180px, 90px 90px;
+  animation:fireRise 14s linear infinite;
+  filter:blur(1px);
+}
+
+/* BARA API */
+.fire-bg::after{
+  content:"";
+  position:absolute;
+  inset:-200%;
+  background:
+    radial-gradient(circle, rgba(255,80,0,.9) 1px, transparent 2px),
+    radial-gradient(circle, rgba(255,160,0,.8) 2px, transparent 3px);
+  background-size:60px 60px, 100px 100px;
+  animation:emberFly 9s linear infinite;
+  filter:blur(.4px);
+}
+@media(max-width:600px){
+  .fire-bg::before,
+  .fire-bg::after{
+    filter:blur(0);
+    opacity:.6;
+  }
+}
+@keyframes fireRise{
+  0%{transform:translateY(0)}
+  100%{transform:translateY(-800px)}
+}
+
+@keyframes emberFly{
+  0%{transform:translate(0,0)}
+  100%{transform:translate(-200px,-900px)}
+}
+
+/* ===== NAVBAR AESTHETIC PREMIUM ===== */
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:16px 46px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:linear-gradient(
+    180deg,
+    rgba(0,0,0,.85),
+    rgba(0,0,0,.55)
+  );
+  backdrop-filter:blur(22px);
+  border-bottom:1px solid rgba(255,120,0,.25);
+  box-shadow:
+    0 10px 40px rgba(0,0,0,.9),
+    inset 0 0 40px rgba(255,80,0,.15);
+  z-index:100;
+}
+
+/* LOGO */
+.logo-wrap{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.logo-circle{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:radial-gradient(circle,var(--yellow),var(--red));
+  box-shadow:
+    0 0 30px rgba(255,120,0,.8),
+    0 0 90px rgba(255,80,0,1);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.5s;
+}
+.logo-circle{
+  position:relative;
+}
+.logo-circle:hover{
+  transform:rotate(8deg) scale(1.12);
+}
+.logo-circle img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:50%;
+  mix-blend-mode:overlay;
+}
+.logo-text{
+  font-weight:900;
+  font-size:19px;
+  letter-spacing:1px;
+  background:linear-gradient(var(--yellow),var(--red));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 18px rgba(255,80,0,.8);
+}
+.logo-circle::before{
+  content:"";
+  position:absolute;
+  inset:-6px;
+  border-radius:50%;
+  background:
+    conic-gradient(
+      from 0deg,
+      var(--yellow),
+      var(--orange),
+      var(--red),
+      var(--yellow)
+    );
+  filter:blur(8px);
+  animation:spinFire 4s linear infinite;
+  z-index:-1;
+}
+
+/* MENU LINK */
+.nav-menu{
+  display:flex;
+  gap:32px;
+}
+
+.nav-menu a{
+  position:relative;
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+  letter-spacing:1px;
+  padding:6px 0;
+  transition:.4s;
+}
+
+/* GARIS API */
+.nav-menu a::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-10px;
+  width:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--yellow),var(--red));
+  border-radius:10px;
+  box-shadow:0 0 18px rgba(255,120,0,1);
+  transform:translateX(-50%);
+  transition:.4s;
+}
+
+.nav-menu a:hover{
+  color:var(--yellow);
+  text-shadow:0 0 20px rgba(255,120,0,1);
+}
+
+.nav-menu a:hover::before{
+  width:100%;
+}
+
+/* HAMBURGER AESTHETIC */
+.hamburger{
+  display:none;
+  flex-direction:column;
+  gap:7px;
+  cursor:pointer;
+}
+
+.hamburger span{
+  width:30px;
+  height:3px;
+  background:linear-gradient(var(--yellow),var(--red));
+  border-radius:6px;
+  transition:.4s;
+  box-shadow:0 0 10px rgba(255,120,0,.8);
+}
+
+/* HAMBURGER ANIMATION */
+.hamburger.active span:nth-child(1){
+  transform:rotate(45deg) translate(6px,6px);
+}
+.hamburger.active span:nth-child(2){
+  opacity:0;
+}
+.hamburger.active span:nth-child(3){
+  transform:rotate(-45deg) translate(7px,-7px);
+}
+
+/* MOBILE MENU */
+@media(max-width:900px){
+  .nav-menu{
+    position:absolute;
+    top:90px;
+    right:-100%;
+    flex-direction:column;
+    background:linear-gradient(
+      180deg,
+      rgba(0,0,0,.95),
+      rgba(10,10,10,.9)
+    );
+    width:240px;
+    padding:36px;
+    border-radius:30px 0 0 30px;
+    box-shadow:
+      -20px 0 60px rgba(255,80,0,.9);
+    transition:.5s;
+  }
+
+  .nav-menu.active{
+    right:0;
+  }
+
+  .hamburger{
+    display:flex;
+  }
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  padding:190px 50px 90px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:40px;
+}
+.hero:hover{filter:drop-shadow(0 0 120px rgba(255,80,0,.7))}
+.hero h1{font-size:64px;font-weight:900}
+.fire{
+  background:linear-gradient(var(--yellow),var(--red));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero p{margin:26px 0;color:#ddd;max-width:540px}
+.hero img{
+  width:380px;
+  animation:floating 4s ease-in-out infinite;
+  filter:drop-shadow(0 0 90px rgba(255,80,0,1));
+  border-radius: 40px;
+}
+@keyframes floating{50%{transform:translateY(-25px)}}
+
+.btn{
+  display:inline-flex;align-items:center;gap:12px;
+  padding:18px 60px;border-radius:60px;
+  background:linear-gradient(var(--yellow),var(--orange),var(--red));
+  color:#000;font-weight:900;text-decoration:none;
+  box-shadow:0 0 140px rgba(255,120,0,1);
+}
+.btn:hover{transform:scale(1.15)}
+
+/* MENU */
+.menu{padding:180px 40px;text-align:center}
+.menu:hover{filter:drop-shadow(0 0 140px rgba(255,80,0,.9))}
+.menu h2{
+  font-size:54px;font-weight:900;
+  background:linear-gradient(var(--yellow),var(--red));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.menu-desc{color:#ccc;margin:20px auto 80px;max-width:680px}
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:60px;
+}
+.menu-card{
+  padding:32px;border-radius:36px;
+  background:rgba(255,255,255,.08);
+  box-shadow:0 0 140px rgba(255,80,0,.9);
+  transition:.6s;
+}
+.menu-card:hover{
+  transform:translateY(-30px) scale(1.12);
+  box-shadow:0 0 300px rgba(255,80,0,1);
+}
+.menu-card img{
+  width:100%;height:200px;
+  object-fit:cover;border-radius:24px;
+}
+.price{
+  display:inline-block;margin-top:16px;
+  padding:10px 28px;border-radius:30px;
+  background:linear-gradient(var(--yellow),var(--red));
+  color:#000;font-weight:900;
+}
+
+/* PROMO */
+.promo{text-align:center;padding:200px 20px}
+.promo:hover{filter:drop-shadow(0 0 240px rgba(0,255,255,1))}
+.promo-box{
+  max-width:520px;margin:auto;
+  padding:80px 40px;border-radius:60px;
+  border:3px dashed var(--ice);
+  box-shadow:0 0 340px rgba(0,255,255,1);
+}
+.promo-big{
+  font-size:46px;font-weight:900;color:var(--ice);
+  animation:pulse 1.6s infinite;
+}
+@keyframes pulse{50%{transform:scale(1.2)}}
+.promo-btn{
+  margin-top:40px;
+  padding:18px 56px;border-radius:60px;
+  background:linear-gradient(var(--ice),#fff);
+  color:#000;font-weight:900;
+  cursor:pointer;
+}
+
+/* POPUP */
+.popup{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.85);
+  backdrop-filter:blur(18px);
+  display:none;justify-content:center;align-items:center;
+  z-index:999;
+}
+.popup-box{
+  background:linear-gradient(var(--ice),#fff);
+  color:#000;padding:60px;
+  max-width:440px;border-radius:50px;
+  text-align:center;
+}
+
+/* FOOTER */
+footer{
+  padding:140px 40px;
+  background:#000;text-align:center;
+}
+footer:hover{filter:drop-shadow(0 0 140px rgba(255,80,0,1))}
+footer h3{
+  font-size:34px;
+  background:linear-gradient(var(--yellow),var(--red));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+footer p{color:#bbb;margin:14px 0}
+.map{
+  max-width:340px;margin:30px auto 0;
+  border-radius:24px;overflow:hidden;
+  box-shadow:0 0 90px rgba(255,80,0,1);
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero{flex-direction:column;text-align:center}
+  .hero img{width:280px}
+  .nav-menu{
+    position:absolute;top:80px;right:-100%;
+    background:#000;flex-direction:column;
+    width:220px;padding:30px;
+    transition:.4s;
+  }
+  .nav-menu.active{right:0}
+  .hamburger{display:flex}
+}
+.fire-glow{
+  position:fixed;
+  width:300px;
+  height:300px;
+  background:radial-gradient(circle, rgba(255,120,0,.35), transparent 70%);
+  pointer-events:none;
+  mix-blend-mode:screen;
+  z-index:-2;
+}
+/* ===== GLOBAL TEXT GLOW ===== */
+h1,h2,h3,h4,h5,h6{
+  text-shadow:
+    0 0 12px rgba(255,120,0,.6),
+    0 0 30px rgba(255,80,0,.5),
+    0 0 60px rgba(255,0,0,.4);
+}
+
+p,span,a{
+  text-shadow:
+    0 0 6px rgba(255,255,255,.35),
+    0 0 18px rgba(255,120,0,.35);
+}
+
+/* GLOW KHUSUS TOMBOL */
+.btn,.promo-btn{
+  box-shadow:
+    0 0 30px rgba(255,120,0,.8),
+    0 0 90px rgba(255,80,0,1);
+  text-shadow:0 0 8px #000;
+}
+
+/* MENU CARD TEXT */
+.menu-card h3{
+  text-shadow:
+    0 0 20px rgba(255,120,0,1),
+    0 0 60px rgba(255,80,0,.9);
+}
+.fire-text{
+  background:
+    linear-gradient(
+      120deg,
+      var(--yellow),
+      var(--orange),
+      var(--red),
+      var(--yellow)
+    );
+  background-size:300%;
+  animation:fireMove 3s linear infinite;
+  :text;
+  -webkit-text-fill-color:transparent;
+}
+
+@keyframes fireMove{
+  0%{background-position:0%}
+  100%{background-position:300%}
+}
+.footer-glow{
+  padding:160px 30px;
+  background:
+    radial-gradient(circle at top, rgba(255,80,0,.25), transparent 60%),
+    linear-gradient(#000,#050505);
+  box-shadow:inset 0 0 200px rgba(255,80,0,.6);
+}
+
+.footer-inner{
+  max-width:900px;
+  margin:auto;
+  text-align:center;
+}
+
+.footer-info{
+  margin:30px 0;
+}
+
+footer small{
+  display:block;
+  margin-top:40px;
+  color:#aaa;
+  text-shadow:0 0 10px rgba(255,255,255,.4);
+}
+
+</style>
+</head>
+
+<body>
+<div class="fire-glow" id="fireGlow"></div>
+
+<div class="loader" id="loader">
+  <h1>Berkah Jaya</h1>
+  <p>FLAVOR THAT STAYS</p>
+</div>
+
+<div class="fire-bg"></div>
+
+<nav>
+  <div class="logo-wrap">
+    <div class="logo-circle">
+      <img src="Merah Krem Lingkaran Siomay Logo_20260106_180124_0000-fotor-bg-remover-20260107102956.png">
+    </div>
+    <div class="logo-text">Berkah Jaya Fried Chicken</div>
+  </div>
+
+  <div class="nav-menu" id="navMenu">
+    <a href="#">Home</a>
+    <a href="#menu">Menu</a>
+    <a href="#promo">Promo</a>
+    <a href="#kontak">Alamat</a>
+  </div>
+
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+</nav>
+
+<section class="hero">
+  <div>
+    <h1><span class="fire">AYAM GEPREK</span><br>& FRIED CHICKEN</h1>
+    <p>Ayam renyah & pedas dengan bumbu khas gurih krispi.Dijamin halal, harga hemat  </p>
+    <a href="https://wa.me/6281288533844" class="btn">
+      <i class="fab fa-whatsapp"></i> ORDER SEKARANG
+    </a>
+  </div>
+  <img src="Pap makan ayam geprek.jpg">
+</section>
+
+<section class="menu" id="menu">
+<h2 class="fire-text">MENU ANDALAN</h2>
+  <p class="menu-desc">Pilihan terbaik untuk pecinta ayam dan pedas sejati.</p>
+
+  <div class="menu-grid">
+    <div class="menu-card">
+      <img src="Ayam Krispi Geprek Pedas Enak Khas Jogja - Resep _ ResepKoki.jpg">
+      <h3>Ayam Geprek</h3>
+      <p>Pedas nampol, sambal fresh.</p>
+      <span class="price">Rp 10.000</span>
+    </div>
+
+    <div class="menu-card">
+      <img src="The aroma of sizzling butter and savory spices….jpg">
+      <h3>Fried Chicken</h3>
+      <p>Renyah, juicy, dan gurih.</p>
+      <span class="price">Rp 7.000</span>
+    </div>
+
+    <div class="menu-card">
+      <img src="_Revolutionize Your Health with Refreshing Weight Loss Juices!_.jpg">
+      <h3>Es Teh</h3>
+      <p>Segar dengan gula asli.</p>
+      <span class="price">Rp 2.500</span>
+    </div>
+  </div>
+</section>
+
+<section class="promo" id="promo">
+  <h2>PROMO JUM’AT BERKAH</h2>
+  <div class="promo-box">
+    <div class="promo-big">BELI 2 GRATIS 1</div>
+    <p>Nikmati Es teh dengan berbagi bersama .</p>
+    <div class="promo-btn" onclick="popup.style.display='flex'">AMBIL PROMO</div>
+  </div>
+</section>
+
+<div class="popup" id="popup">
+  <div class="popup-box">
+    <h3>🔥 PROMO SPESIAL 🔥</h3>
+    <p>Dua beli, satu gratis. Jangan sampai kelewatan.</p>
+    <div class="promo-btn" onclick="popup.style.display='none'">SIAP 🔥</div>
+  </div>
+</div>
+<footer id="kontak" class="footer-glow">
+  <div class="footer-inner">
+    <h3 class="fire-text">Berkah Jaya Fried Chicken</h3>
+    <p>🔥 Ayam geprek & fried chicken terbaik 🔥</p>
+
+    <div class="footer-info">
+      <p>📍 Depan Alfamart Ribug</p>
+      <p>Punggelan, Banjarnegara, Jawa Tengah</p>
+      <p>📞 0812-8853-3844</p>
+    </div>
+
+
+    <div class="map">
+      <iframe 
+        src="https://www.google.com/maps?q=Punggelan,+Banjarnegara,+Jawa+Tengah&output=embed"
+        width="100%" height="180" style="border:0">
+      </iframe>
+    </div>
+
+    <small>© 2026 Berkah Jaya Fried Chicken</small>
+  </div>
+</footer>
+
+<script>
+const loader = document.getElementById("loader");
+const popup = document.getElementById("popup");
+const navMenu = document.getElementById("navMenu");
+const hamburger = document.getElementById("hamburger");
+const glow = document.getElementById("fireGlow");
+
+window.addEventListener("load", () => {
+  setTimeout(() => loader.classList.add("hide"), 1800);
+});
+
+function toggleMenu(){
+  navMenu.classList.toggle("active");
+  hamburger.classList.toggle("active");
+}
+
+document.addEventListener("mousemove", e => {
+  glow.style.left = e.clientX - 150 + "px";
+  glow.style.top  = e.clientY - 150 + "px";
+});
+</script>
+
+</body>
+</html>

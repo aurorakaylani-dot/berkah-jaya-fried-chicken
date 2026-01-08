@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>RedFire Chicken</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+  --red:#ff1e00;
+  --orange:#ff7a00;
+  --yellow:#ffd000;
+  --dark:#050505;
+  --ice:#7ffcff;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255,120,0,.35), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(255,0,0,.28), transparent 45%),
+    radial-gradient(circle at 50% 90%, rgba(255,200,0,.18), transparent 50%),
+    linear-gradient(180deg,#050505,#0b0b0b,#060606);
+  color:#fff;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* EFFECT */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:repeating-radial-gradient(circle,rgba(255,255,255,.03) 0 1px,transparent 1px 2px);
+  opacity:.15;
+  pointer-events:none;
+  z-index:-1;
+}
+body::before{
+  content:"";
+  position:fixed;
+  width:700px;height:700px;
+  background:radial-gradient(circle,rgba(255,120,0,.35),rgba(255,0,0,.15),transparent 70%);
+  filter:blur(140px);
+  top:-200px;left:-200px;
+  animation:fireMove 15s linear infinite alternate;
+  z-index:-2;
+}
+@keyframes fireMove{to{transform:translate(500px,400px)}}
+
+/* LOADER */
+.loader{
+  position:fixed;inset:0;background:#050505;
+  display:flex;justify-content:center;align-items:center;
+  z-index:9999;
+}
+.loader h1{
+  font-size:60px;font-weight:900;
+  background:linear-gradient(180deg,var(--yellow),var(--orange),var(--red));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  animation:pulse 1.2s infinite alternate;
+}
+@keyframes pulse{
+  from{text-shadow:0 0 20px #ffb000}
+  to{text-shadow:0 0 90px #ff2a00}
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;width:100%;
+  padding:18px 70px;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(5,5,5,.75);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,120,0,.3);
+  z-index:100;
+}
+.logo{
+  font-weight:900;font-size:22px;
+  background:linear-gradient(180deg,var(--yellow),var(--red));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.nav-menu{display:flex;gap:28px;}
+.nav-menu a{
+  color:#fff;text-decoration:none;font-weight:700;position:relative;
+}
+.nav-menu a::after{
+  content:"";position:absolute;left:0;bottom:-6px;
+  width:0;height:2px;
+  background:linear-gradient(90deg,var(--yellow),var(--red));
+  transition:.4s;
+}
+.nav-menu a:hover::after{width:100%}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  padding:160px 70px 80px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.hero-text{max-width:560px;}
+.hero-text h1{font-size:68px;font-weight:900;line-height:1.05;}
+.fire{
+  background:linear-gradient(180deg,var(--yellow),var(--orange),var(--red));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  animation:fireGlow 1.4s infinite alternate;
+}
+@keyframes fireGlow{
+  from{text-shadow:0 0 30px #ffb000}
+  to{text-shadow:0 0 120px #ff2a00}
+}
+.hero-text p{margin:24px 0 36px;font-size:18px;color:#e0e0e0;}
+.btn{
+  display:inline-flex;gap:14px;
+  padding:20px 70px;border-radius:60px;
+  background:linear-gradient(120deg,var(--yellow),var(--orange),var(--red));
+  color:#000;font-weight:900;text-decoration:none;
+  box-shadow:0 0 60px rgba(255,120,0,1);
+}
+.hero img{
+  width:420px;border-radius:30px;
+  box-shadow:0 0 140px rgba(255,80,0,.9);
+  animation:float 3s ease-in-out infinite;
+}
+@keyframes float{50%{transform:translateY(-18px)}}
+
+/* MARQUEE */
+.marquee{overflow:hidden;white-space:nowrap;margin:20px 0 60px;}
+.marquee span{
+  display:inline-block;padding-left:100%;
+  font-weight:900;font-size:20px;color:#ffb000;
+  animation:marquee 14s linear infinite;
+}
+@keyframes marquee{to{transform:translateX(-100%)}}
+
+/* MENU */
+.menu{padding:120px 70px;text-align:center;}
+.menu h2{
+  font-size:52px;font-weight:900;margin-bottom:60px;
+  background:linear-gradient(180deg,var(--yellow),var(--red));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.menu-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:50px;
+}
+.menu-card{
+  padding:30px;border-radius:30px;
+  background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,.04));
+  box-shadow:0 0 60px rgba(255,80,0,.5);
+}
+.menu-card img{
+  width:100%;height:200px;object-fit:cover;border-radius:20px;
+}
+.price{
+  display:inline-block;margin-top:14px;
+  padding:10px 26px;border-radius:30px;
+  background:linear-gradient(45deg,var(--yellow),var(--red));
+  color:#000;font-weight:900;
+}
+
+/* PROMO ES TEH */
+@keyframes iceFloat{50%{transform:translateY(-12px)}}
+@keyframes iceGlow{
+  from{box-shadow:0 0 40px rgba(0,255,255,.4)}
+  to{box-shadow:0 0 140px rgba(0,255,255,1)}
+}
+
+.promo{
+  padding:140px 70px;
+  text-align:center;
+}
+.promo h2{
+  font-size:56px;font-weight:900;
+  background:linear-gradient(180deg,var(--ice),#fff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.promo-sub{
+  margin:20px auto 70px;
+  max-width:600px;font-size:18px;color:#cfffff;
+}
+.promo-ice-box{
+  max-width:520px;margin:auto;
+  padding:60px 40px;border-radius:40px;
+  border:3px dashed var(--ice);
+  background:linear-gradient(180deg,rgba(0,255,255,.25),rgba(255,255,255,.05));
+  animation:iceGlow 1.8s infinite alternate;
+}
+.promo-ice-box .icon{
+  font-size:90px;margin-bottom:20px;
+  animation:iceFloat 2s ease-in-out infinite;
+}
+.promo-ice-box .big{
+  font-size:42px;font-weight:900;color:var(--ice);
+}
+.promo-ice-box .tag{
+  margin-top:20px;display:inline-block;
+  padding:12px 30px;border-radius:30px;
+  background:linear-gradient(45deg,var(--ice),#fff);
+  color:#000;font-weight:900;
+}
+
+/* FOOTER */
+footer{padding:40px;text-align:center;color:#ff9a3c;font-size:14px;}
+
+@media(max-width:900px){
+  nav{padding:14px 26px}
+  .nav-menu{display:none}
+  .hero{flex-direction:column;text-align:center}
+  .hero img{width:280px;margin-top:40px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="loader" id="loader"><h1>RED🔥FIRE</h1></div>
+
+<nav>
+  <div class="logo">RedFire Chicken</div>
+  <div class="nav-menu">
+    <a href="#">Home</a>
+    <a href="#menu">Menu</a>
+    <a href="#promo">Promo</a>
+    <a href="#">Kontak</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1><span class="fire">FRIED CHICKEN</span><br>& AYAM GEPREK</h1>
+    <p>Bukan ayam biasa.<br><b>Pedasnya bikin balik lagi</b> 🔥</p>
+    <a href="#" class="btn"><i class="fab fa-whatsapp"></i> ORDER SEKARANG</a>
+  </div>
+  <img src="Pap makan ayam geprek.jpg">
+</section>
+
+<div class="marquee">
+  <span>🔥 PEDAS • RENYAH • JUICY • MURAH • BIKIN BALIK LAGI 🔥</span>
+</div>
+
+<section class="menu" id="menu">
+  <h2>MENU ANDALAN 🔥</h2>
+  <div class="menu-grid">
+
+    <div class="menu-card">
+      <img src="Ayam Krispi Geprek Pedas Enak Khas Jogja - Resep _ ResepKoki.jpg">
+      <h3>Ayam Geprek</h3>
+      <p>Sambal brutal, ayam krispi, auto nagih 🌶️</p>
+      <span class="price">Rp 10.000</span>
+    </div>
+
+    <div class="menu-card">
+      <img src="The aroma of sizzling butter and savory spices….jpg">
+      <h3>Fried Chicken</h3>
+      <p>Renyah di luar, juicy di dalam 🍗</p>
+      <span class="price">Rp 7.000</span>
+    </div>
+
+    <div class="menu-card">
+      <img src="tea o ais_beng.jpg">
+      <h3>Es Teh</h3>
+      <p>Penyelamat setelah perang pedas ❄️</p>
+      <span class="price">Rp 2.500</span>
+    </div>
+
+  </div>
+</section>
+
+<section class="promo" id="promo">
+  <div class="marquee">
+    <span>❄️ ES TEH BELI 2 GRATIS 1 • KHUSUS HARI JUM'AT ❄️</span>
+  </div>
+
+  <h2>PROMO ES TEH JUM'AT ❄️</h2>
+  <p class="promo-sub">Pedasnya ayam? <b>Es teh yang urus.</b></p>
+
+  <div class="promo-ice-box">
+    <div class="icon">🧊🥤</div>
+    <div class="big">BELI 2 GRATIS 1</div>
+    <div class="tag">SETIAP HARI JUM'AT</div>
+  </div>
+</section>
+
+<footer>
+© 2025 RedFire Chicken<br>
+Bukan sekadar ayam. Ini soal nyali & rasa 🔥
+</footer>
+
+<script>
+window.addEventListener("load",()=>{
+  setTimeout(()=>{
+    document.getElementById("loader").style.display="none";
+  },1500);
+});
+</script>
+
+</body>
+</html>
