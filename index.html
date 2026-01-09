@@ -20,11 +20,26 @@ body{background:#050505;color:#fff;overflow-x:hidden}
 
 /* LOADER */
 .loader{
-  position:fixed;inset:0;
+  position:fixed;
+  inset:0;
+  min-height:100svh; /* FIX MOBILE */
   background:radial-gradient(circle,#250000,#050505);
-  display:flex;flex-direction:column;
-  justify-content:center;align-items:center;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
   z-index:9999;
+  text-align:center;
+  padding:20px;
+}
+@media(max-width:600px){
+  .loader h1{
+    font-size:42px;
+  }
+  .loader p{
+    font-size:12px;
+    letter-spacing:4px;
+  }
 }
 .loader.hide{opacity:0;visibility:hidden;transition:1.4s}
 .loader h1{
@@ -37,6 +52,12 @@ body{background:#050505;color:#fff;overflow-x:hidden}
 @keyframes glow{
   from{text-shadow:0 0 40px rgba(255,80,0,.4)}
   to{text-shadow:0 0 160px rgba(255,80,0,1)}
+}
+.loader{
+  pointer-events:all;
+}
+.loader.hide{
+  pointer-events:none;
 }
 
 /* ===== FIRE BACKGROUND SUPER RAMAI ===== */
@@ -554,7 +575,7 @@ footer small{
     </div>
 
     <div class="menu-card">
-      <img src="_Revolutionize Your Health with Refreshing Weight Loss Juices!_.jpg">
+      <img src="tea o ais_beng.jpg" alt="Es Teh Segar">
       <h3>Es Teh</h3>
       <p>Segar dengan gula asli.</p>
       <span class="price">Rp 2.500</span>
@@ -567,7 +588,7 @@ footer small{
   <div class="promo-box">
     <div class="promo-big">BELI 2 GRATIS 1</div>
     <p>Nikmati Es teh dengan berbagi bersama .</p>
-    <div class="promo-btn" onclick="openPromo()">AMBIL PROMO</div>
+    <div class="promo-btn" onclick="openPromo()">KLIK PROMO !</div>
   </div>
 </section>
 
