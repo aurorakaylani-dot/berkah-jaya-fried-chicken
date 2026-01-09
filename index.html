@@ -246,6 +246,9 @@ nav{
 
 /* MOBILE MENU */
 @media(max-width:900px){
+  .hero{flex-direction:column;text-align:center}
+  .hero img{width:280px}
+
   .nav-menu{
     position:absolute;
     top:90px;
@@ -396,20 +399,7 @@ footer p{color:#bbb;margin:14px 0}
   border-radius:24px;overflow:hidden;
   box-shadow:0 0 90px rgba(255,80,0,1);
 }
-
-/* RESPONSIVE */
-@media(max-width:900px){
-  .hero{flex-direction:column;text-align:center}
-  .hero img{width:280px}
-  .nav-menu{
-    position:absolute;top:80px;right:-100%;
-    background:#000;flex-direction:column;
-    width:220px;padding:30px;
-    transition:.4s;
-  }
-  .nav-menu.active{right:0}
-  .hamburger{display:flex}
-}
+ 
 .fire-glow{
   position:fixed;
   width:300px;
@@ -448,17 +438,17 @@ p,span,a{
     0 0 60px rgba(255,80,0,.9);
 }
 .fire-text{
-  background:
-    linear-gradient(
-      120deg,
-      var(--yellow),
-      var(--orange),
-      var(--red),
-      var(--yellow)
-    );
+  background:linear-gradient(
+    120deg,
+    var(--yellow),
+    var(--orange),
+    var(--red),
+    var(--yellow)
+  );
   background-size:300%;
-  animation:fireMove 3s
- linear infinite;text-webkit-text-fill-color:transparent
+  animation:fireMove 3s linear infinite;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
 @keyframes fireMove{
@@ -489,6 +479,13 @@ footer small{
   color:#aaa;
   text-shadow:0 0 10px rgba(255,255,255,.4);
 }
+@media(max-width:600px){
+  .fire-bg::before,
+  .fire-bg::after{
+    animation-duration:25s;
+    opacity:.5;
+  }
+}
 
 </style>
 </head>
@@ -515,7 +512,7 @@ footer small{
     <a href="#">Home</a>
     <a href="#menu">Menu</a>
     <a href="#promo">Promo</a>
-    <a href="#kontak">Alamat</a>
+    <a href="#kontak">Kunjungi</a>
   </div>
 
   <div class="hamburger" id="hamburger" onclick="toggleMenu()">
@@ -570,15 +567,15 @@ footer small{
   <div class="promo-box">
     <div class="promo-big">BELI 2 GRATIS 1</div>
     <p>Nikmati Es teh dengan berbagi bersama .</p>
-    <div class="promo-btn" onclick="popup.style.display='flex'">AMBIL PROMO</div>
+    <div class="promo-btn" onclick="openPromo()">AMBIL PROMO</div>
   </div>
 </section>
 
 <div class="popup" id="popup">
   <div class="popup-box">
     <h3>🔥 PROMO SPESIAL 🔥</h3>
-    <p>Dua beli, satu gratis. Jangan sampai kelewatan.</p>
-    <div class="promo-btn" onclick="popup.style.display='none'">SIAP 🔥</div>
+    <p>Dua beli, satu gratis <b>(Khusus Es Teh di hari Jum'at)</b>. Jangan sampai kelewatan.</p>
+  <div class="promo-btn" onclick="closePromo()">SIAP 🔥</div>
   </div>
 </div>
 <footer id="kontak" class="footer-glow">
@@ -624,6 +621,12 @@ document.addEventListener("mousemove", e => {
   glow.style.left = e.clientX - 150 + "px";
   glow.style.top  = e.clientY - 150 + "px";
 });
+function openPromo(){
+  popup.style.display='flex';
+}
+function closePromo(){
+  popup.style.display='none';
+}
 </script>
 
 </body>
